@@ -112,6 +112,9 @@ func (p *ipecho) parseIP(question *dns.Question) net.IP {
 				}
 				return nil
 			}
+			if split := strings.split(subdomain, "-"); len(split) > 1 {
+				subdomain := split[len(split)-1]
+			}
 			if p.Config.Debug {
 				log.Printf("[ipecho] Parsed Subdomain of '%s' is '%s'\n", question.Name, subdomain)
 			}
