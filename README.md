@@ -24,4 +24,4 @@ ipecho {
 * **domain** adds the domain that should be handled
 * **ttl** defines the ttl that should be used in the response
 * **debug** enables debug logging
-* **usedashprefix** enables enables prefix with dash separator
+* **usedashprefix** enables prefix with dash separator
