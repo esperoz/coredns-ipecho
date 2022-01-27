@@ -17,6 +17,8 @@ type config struct {
 	TTL uint32
 	// Debug mode
 	Debug bool
+	// Prefix delimiter
+	UseDashPrefix bool
 }
 
 func newConfigFromDispenser(c caddyfile.Dispenser) (*config, error) {
@@ -55,10 +57,13 @@ func newConfigFromDispenser(c caddyfile.Dispenser) (*config, error) {
 			}
 		} else if strings.EqualFold(c.Val(), "debug") {
 			config.Debug = true
+		} else if strings.EqualFold(c.Val(), "usedashprefix") {
+			config.UseDashPrefix = true
 		}
 	}
 	if config.Debug {
 		log.Println("[ipecho] Debug Mode is on")
+		log.Printf("[ipecho] UseDashPrefix set to %t\n",config.UseDashPrefix)
 		log.Printf("[ipecho] Parsed %d Domains: %s\n", len(config.Domains), strings.Join(config.Domains, ", "))
 		log.Printf("[ipecho] TTL is %d", config.TTL)
 	}
