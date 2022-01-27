@@ -17,6 +17,7 @@ func TestNewConfigFromDispenser(t *testing.T) {
 				Domain example2.com
 				Domain example1.com
 				Debug
+				UseDashPrefix
 			}
 		`)))
 		config, err := newConfigFromDispenser(dispenser)
@@ -27,6 +28,7 @@ func TestNewConfigFromDispenser(t *testing.T) {
 		require.Equal(t, "example2.com.", config.Domains[1])
 		require.Equal(t, uint32(60), config.TTL)
 		require.Equal(t, true, config.Debug)
+		require.Equal(t, true, config.UseDashPrefix)
 	})
 	t.Run("Emtpy Config", func(t *testing.T) {
 		dispenser := caddyfile.NewDispenser("", buffer.NewReader([]byte(`
@@ -55,6 +57,7 @@ func TestNewConfigFromDispenser(t *testing.T) {
 		require.Equal(t, 1, len(config.Domains))
 		require.Equal(t, uint32(2629800), config.TTL)
 		require.Equal(t, false, config.Debug)
+		require.Equal(t, false, config.UseDashPrefix)
 	})
 	t.Run("Invalid Domain", func(t *testing.T) {
 		dispenser := caddyfile.NewDispenser("", buffer.NewReader([]byte(`
